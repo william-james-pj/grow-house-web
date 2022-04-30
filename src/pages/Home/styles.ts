@@ -12,6 +12,14 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  ${respondToDown.md`
+    padding: 106px 0 0 0;
+  `}
+
+  ${respondToDown.md`
+    padding: 32px 0 0 0;
+  `}
 `;
 
 export const Title = styled.h2`
@@ -20,6 +28,10 @@ export const Title = styled.h2`
   user-select: none;
 
   margin-bottom: 16px;
+
+  ${respondToDown.md`
+    padding: 0 0 0 32px;
+  `}
 
   ${respondToDown.xs`
     font-size: ${fonts.md};
