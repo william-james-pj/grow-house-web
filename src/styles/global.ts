@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { delay } from '../config/variables';
 
 export default createGlobalStyle`
   * {
@@ -8,11 +9,16 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.background};
     font-size: 16px;
+    transition: ${delay};
   }
 
   body, input, button, textarea{
     font: 400 16px 'Robot', sans-serif;
   }
+
+  ul {
+      list-style: none;
+    }
 `;
