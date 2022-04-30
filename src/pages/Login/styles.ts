@@ -78,6 +78,10 @@ export const Form = styled.form`
 
   display: flex;
   flex-direction: column;
+
+  > button {
+    margin-top: 32px;
+  }
 `;
 
 export const Label = styled.label`
@@ -111,7 +115,7 @@ export const TextForgot = styled.p`
   text-align: right;
   cursor: pointer;
 
-  margin: 32px 0;
+  margin: 32px 0 0;
 
   ${respondToDown.xs`
     font-size: ${fonts.sm};
@@ -142,6 +146,8 @@ export const NavigationLink = styled.p`
   user-select: none;
 
   margin-left: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 
   ${respondToDown.xs`
     font-size: ${fonts.sm};
