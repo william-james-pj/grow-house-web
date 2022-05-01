@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import * as fonts from '../../config/fonts';
 import { respondToDown } from '../../config/respondTo';
+import { delay } from '../../config/variables';
 
 export const Container = styled.div`
   min-width: 280px;
@@ -18,6 +19,14 @@ export const Container = styled.div`
     margin-left: 32px;
   }
 
+  transition: ${delay};
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+  :hover {
+    opacity: 0.6;
+  }
+
   ${respondToDown.xs`
     min-width: 240px;
   `}
@@ -28,6 +37,7 @@ export const ImageContainer = styled.div`
   height: 65%;
 
   background: ${(props) => props.theme.colors.secundary};
+  transition: ${delay};
 
   display: flex;
   align-items: flex-end;

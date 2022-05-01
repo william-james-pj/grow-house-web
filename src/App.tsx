@@ -1,6 +1,7 @@
 import GlobalStyle from './styles/global';
 
 import { ColorModeContext } from './contexts/ColorModeContext';
+import { ModalDiscoverProvider } from './contexts/ModalDiscoverContext';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -10,9 +11,11 @@ function App() {
   return (
     <ColorModeContext>
       <GlobalStyle />
-      <BrowserRouter>
-        <MainRoutes />
-      </BrowserRouter>
+      <ModalDiscoverProvider>
+        <BrowserRouter>
+          <MainRoutes />
+        </BrowserRouter>
+      </ModalDiscoverProvider>
     </ColorModeContext>
   );
 }

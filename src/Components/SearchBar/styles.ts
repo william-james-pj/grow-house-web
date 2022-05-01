@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { respondToDown } from '../../config/respondTo';
+import { delay } from '../../config/variables';
 // import * as fonts from '../../config/fonts';
 
 export const Wrapper = styled.div`
@@ -14,6 +15,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  transition: ${delay};
 
   ${respondToDown.sm`
     width: 100%;
@@ -33,6 +36,8 @@ export const TextInput = styled.input.attrs((props) => ({
 
   height: 100%;
   width: 80%;
+
+  transition: ${delay};
 
   :focus {
     outline: none !important;
