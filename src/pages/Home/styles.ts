@@ -32,7 +32,7 @@ export const Header = styled.div`
   justify-content: space-between;
 
   ${respondToDown.md`
-    padding: 0 32px 0 0;
+    padding: 0 32px;
   `}
 `;
 
@@ -40,10 +40,6 @@ export const Title = styled.h2`
   font-size: ${fonts.xl};
   color: ${({ theme }) => theme.colors.text};
   user-select: none;
-
-  ${respondToDown.md`
-    padding: 0 0 0 32px;
-  `}
 
   ${respondToDown.xs`
     font-size: ${fonts.md};
