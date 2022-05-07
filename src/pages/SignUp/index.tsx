@@ -7,8 +7,11 @@ import logoImg from '../../assets/Logo.svg';
 import { Button } from '../../Components/Button';
 import { InputText } from '../../Components/InputText';
 import { Loading } from '../../Components/Loading';
+import { emailValidator } from '../../utils/emailValidator';
+import { passwordValidator } from '../../utils/passwordValidator';
 
 import * as S from '../Login/styles';
+import { confirmPasswordValidator } from '../../utils/confirmPasswordValidator';
 
 export function SignUp() {
   const { signin } = useAuth();
@@ -51,18 +54,27 @@ export function SignUp() {
               placeholder="E-mail"
               onChangeText={setEmail}
               value={email}
+              validator={emailValidator}
+              errorText={'Por favor insira um endereço de e-mail válido'}
             />
             <InputText
+              type="password"
               label="Senha"
               placeholder="Senha"
               onChangeText={setPassword}
               value={password}
+              validator={passwordValidator}
+              errorText={'A senha deve ter pelo menos 6 caracteres'}
             />
             <InputText
-              label="Repita a senha"
-              placeholder="Repita a senha"
+              type="password"
+              label="Senha de confirmação"
+              placeholder="Senha de confirmação"
               onChangeText={setRepeatPassword}
               value={repeatPassword}
+              confirmPasswordValidator={confirmPasswordValidator}
+              confirmPassword={password}
+              errorText={'Senha e senha de confirmação devem ser iguais.'}
             />
             <Button type="submit">Entrar</Button>
           </S.Form>

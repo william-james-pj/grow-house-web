@@ -8,6 +8,8 @@ import logoImg from '../../assets/Logo.svg';
 import { Button } from '../../Components/Button';
 import { InputText } from '../../Components/InputText';
 import { Loading } from '../../Components/Loading';
+import { emailValidator } from '../../utils/emailValidator';
+import { passwordValidator } from '../../utils/passwordValidator';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -49,12 +51,17 @@ export function Login() {
               placeholder="E-mail"
               onChangeText={setEmail}
               value={email}
+              validator={emailValidator}
+              errorText={'Por favor insira um endereço de e-mail válido'}
             />
             <InputText
+              type="password"
               label="Senha"
               placeholder="Senha"
               onChangeText={setPassword}
               value={password}
+              validator={passwordValidator}
+              errorText={'A senha deve ter pelo menos 6 caracteres'}
             />
             <S.TextForgot>Esqueceu a senha?</S.TextForgot>
             <Button type="submit">Entrar</Button>
