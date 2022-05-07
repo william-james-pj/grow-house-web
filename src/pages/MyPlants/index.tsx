@@ -1,11 +1,10 @@
-import * as S from './styles';
-import { Container, Title } from '../Home/styles';
+import { useState } from 'react';
 
 import { SearchBar } from '../../Components/SearchBar';
 import { CardMyPlants } from '../../Components/CardMyPlants';
 
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
-import { useState } from 'react';
+import * as S from './styles';
+import { Container, Title } from '../Home/styles';
 
 export function MyPlats() {
   const [searchText, setSearchText] = useState('');
@@ -25,46 +24,12 @@ export function MyPlats() {
         />
       </S.Header>
       <S.CarouselContainer>
-        <Carousel
-          plugins={[
-            'fastSwipe',
-            {
-              resolve: slidesToShowPlugin,
-              options: {
-                numberOfSlides: 3,
-              },
-            },
-          ]}
-          breakpoints={{
-            768: {
-              plugins: [
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 2,
-                  },
-                },
-              ],
-            },
-
-            480: {
-              plugins: [
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 1,
-                  },
-                },
-              ],
-            },
-          }}
-        >
-          <CardMyPlants />
-          <CardMyPlants />
-          <CardMyPlants />
-          <CardMyPlants />
-          <CardMyPlants />
-        </Carousel>
+        <CardMyPlants />
+        <CardMyPlants />
+        <CardMyPlants />
+        <CardMyPlants />
+        <CardMyPlants />
+        <CardMyPlants />
       </S.CarouselContainer>
     </Container>
   );

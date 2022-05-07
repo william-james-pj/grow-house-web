@@ -6,10 +6,9 @@ import { delay } from '../../config/variables';
 export const Container = styled.div`
   width: 100%;
   max-width: 986px;
-  height: 100vh;
-  overflow: hidden;
 
   padding: 106px 0 0 0;
+  overflow-x: hidden;
 
   display: flex;
   flex-direction: column;

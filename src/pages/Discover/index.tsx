@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-import * as S from './styles';
-import { Header } from '../MyPlants/styles';
-
 import { Container, Title } from '../Home/styles';
 import { CardDiscover } from '../../Components/CardDiscover';
 import { SearchBar } from '../../Components/SearchBar';
 
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
+import * as S from './styles';
+import { Header } from '../MyPlants/styles';
 
 export function Discover() {
   const [searchText, setSearchText] = useState('');
@@ -27,46 +25,11 @@ export function Discover() {
         />
       </Header>
       <S.CarouselContainer>
-        <Carousel
-          plugins={[
-            'fastSwipe',
-            {
-              resolve: slidesToShowPlugin,
-              options: {
-                numberOfSlides: 3,
-              },
-            },
-          ]}
-          breakpoints={{
-            768: {
-              plugins: [
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 2,
-                  },
-                },
-              ],
-            },
-
-            480: {
-              plugins: [
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 1,
-                  },
-                },
-              ],
-            },
-          }}
-        >
-          <CardDiscover />
-          <CardDiscover />
-          <CardDiscover />
-          <CardDiscover />
-          <CardDiscover />
-        </Carousel>
+        <CardDiscover />
+        <CardDiscover />
+        <CardDiscover />
+        <CardDiscover />
+        <CardDiscover />
       </S.CarouselContainer>
     </Container>
   );

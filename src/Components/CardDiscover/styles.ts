@@ -4,20 +4,15 @@ import { respondToDown } from '../../config/respondTo';
 import { delay } from '../../config/variables';
 
 export const Container = styled.div`
-  min-width: 280px;
-  height: 350px;
+  width: 350px;
+  height: 200px;
   background: ${({ theme }) => theme.colors.card};
 
   border-radius: 8px;
   overflow: hidden;
 
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  & + & {
-    margin-left: 32px;
-  }
+  flex-direction: row;
 
   transition: ${delay};
   cursor: pointer;
@@ -28,13 +23,14 @@ export const Container = styled.div`
   }
 
   ${respondToDown.xs`
-    min-width: 240px;
+    width: 100%;
+    height: 100%;
   `}
 `;
 
 export const ImageContainer = styled.div`
-  width: 100%;
-  height: 65%;
+  width: 40%;
+  height: 100%;
 
   background: ${(props) => props.theme.colors.secundary};
   transition: ${delay};
@@ -45,14 +41,14 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   user-select: none;
 `;
 
 export const TextContainer = styled.div`
-  width: 100%;
-  height: 45%;
+  width: 60%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -66,6 +62,7 @@ export const Title = styled.p`
   font-weight: 700;
   text-align: center;
   user-select: none;
+  line-height: 1.25;
 
   ${respondToDown.xs`
     font-size: ${fonts.normal};

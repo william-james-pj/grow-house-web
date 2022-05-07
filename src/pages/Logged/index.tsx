@@ -10,7 +10,7 @@ import * as S from './styles';
 export function Logged() {
   const { isOpen, openModal } = useModalDiscover();
   return (
-    <S.Container>
+    <S.Container isModalOpen={isOpen}>
       <Nav />
       <Outlet />
       <ModalDiscover closeModal={() => openModal(false)} isActive={isOpen} />

@@ -1,33 +1,34 @@
 import styled from 'styled-components';
 import * as fonts from '../../config/fonts';
 import { respondToDown } from '../../config/respondTo';
+import { delay } from '../../config/variables';
 
 export const Container = styled.div`
-  min-width: 280px;
-  height: 350px;
+  width: 350px;
+  height: 200px;
   background: ${({ theme }) => theme.colors.card};
+
+  transition: ${delay};
 
   border-radius: 8px;
   overflow: hidden;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   overflow: hidden;
 
-  & + & {
-    margin-left: 32px;
-  }
-
   ${respondToDown.xs`
-    min-width: 240px;
+    width: 100%;
+    height: 100%;
   `}
 `;
 
 export const ImageContainer = styled.div`
-  width: 100%;
-  height: 65%;
+  width: 40%;
+  height: 100%;
 
   background: ${(props) => props.theme.colors.secundary};
+  transition: ${delay};
 
   display: flex;
   align-items: flex-end;
@@ -35,20 +36,20 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   user-select: none;
 `;
 
 export const TextContainer = styled.div`
-  width: 100%;
-  height: 45%;
+  width: 60%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  padding: 0 32px;
+  padding: 0 16px;
 `;
 
 export const Title = styled.p`
@@ -56,6 +57,7 @@ export const Title = styled.p`
   font-size: ${fonts.md};
   font-weight: 700;
   user-select: none;
+  line-height: 1.25;
 
   ${respondToDown.xs`
     font-size: ${fonts.normal};
@@ -66,7 +68,7 @@ export const SubTitle = styled.p`
   color: ${(props) => props.theme.colors.disabled};
   font-size: ${fonts.normal};
   font-weight: 700;
-  margin: 4px 0 20px;
+  margin: 8px 0 20px;
   user-select: none;
 
   ${respondToDown.xs`

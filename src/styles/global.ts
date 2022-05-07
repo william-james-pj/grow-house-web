@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import { delay } from '../config/variables';
-import '@brainhubeu/react-carousel/lib/style.css';
 
 export default createGlobalStyle`
   * {

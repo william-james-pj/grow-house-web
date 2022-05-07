@@ -9,9 +9,10 @@ type ActiveProps = {
 export const Container = styled.div<ActiveProps>`
   width: 100%;
   /* max-width: 986px; */
-  height: 100%;
+  height: 100vh;
 
   z-index: 99;
+  overflow: hidden;
 
   display: ${({ isActive }) => (isActive ? 'flex' : 'none')};
 
