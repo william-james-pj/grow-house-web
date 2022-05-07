@@ -1,12 +1,39 @@
+import { FormEvent, useState } from 'react';
 import * as S from './styles';
 
 import { useNavigate } from 'react-router';
+import { useAuth } from '../../hooks/useAuth';
 
 import logoImg from '../../assets/Logo.svg';
 import { Button } from '../../Components/Button';
+import { InputText } from '../../Components/InputText';
+import { Loading } from '../../Components/Loading';
 
 export function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleLogin = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      if (!email.trim().length || !password.trim().length) return;
+
+      setLoading(true);
+      await login(email, password);
+      setLoading(false);
+      navigate('/');
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <S.Container>
@@ -16,11 +43,19 @@ export function Login() {
           <S.SubTitle>
             Você pode continuar de onde parou fazendo login.
           </S.SubTitle>
-          <S.Form onSubmit={() => {}}>
-            <S.Label>E-mail</S.Label>
-            <S.Input type="text" placeholder="E-mail" />
-            <S.Label>Senha</S.Label>
-            <S.Input type="text" placeholder="Senha" />
+          <S.Form onSubmit={handleLogin}>
+            <InputText
+              label="E-mail"
+              placeholder="E-mail"
+              onChangeText={setEmail}
+              value={email}
+            />
+            <InputText
+              label="Senha"
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+            />
             <S.TextForgot>Esqueceu a senha?</S.TextForgot>
             <Button type="submit">Entrar</Button>
           </S.Form>

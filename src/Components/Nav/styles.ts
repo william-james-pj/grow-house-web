@@ -109,7 +109,7 @@ export const NavIcons = styled.div`
   `}
 `;
 
-export const NavLink = styled.p`
+export const NavLink = styled.span`
   display: flex;
   flex-direction: column;
   align-items: center;

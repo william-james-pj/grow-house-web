@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/useAuth';
 
 import { HomeCard } from '../../Components/HomeCard';
 import { Bell, ArrowExit } from '../../Components/Icon';
@@ -9,6 +10,7 @@ import * as S from './styles';
 export function Home() {
   const theme = useTheme();
   const [switchIsActive, setSwitchIsActive] = useState(true);
+  const { logout } = useAuth();
 
   const pressSwitch = () => {
     setSwitchIsActive(!switchIsActive);
@@ -18,7 +20,7 @@ export function Home() {
     <S.Container>
       <S.Header>
         <S.Title>Home</S.Title>
-        <S.LogOffBox>
+        <S.LogOffBox onClick={() => logout()}>
           <ArrowExit color={theme.colors.white} />
           <S.LogOffText>Sair</S.LogOffText>
         </S.LogOffBox>
