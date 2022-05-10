@@ -155,3 +155,14 @@ export const Img = styled.img`
     max-width: 100px;
   `}
 `;
+
+export const TextError = styled.p`
+  font-size: ${fonts.sm};
+  color: ${({ theme }) => theme.colors.red};
+  font-weight: 700;
+  user-select: none;
+
+  margin: 16px 0 0;
+
+  text-align: center;
+`;

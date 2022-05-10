@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { InputState } from '../../config/types';
 import * as S from './styles';
 
 type InputTextProps = {
@@ -14,12 +15,8 @@ type InputTextProps = {
     password: string,
     confirmPassword: string,
   ) => boolean;
+  setValidState?: (value: InputState) => void;
 };
-
-const Valid = true;
-const Invalid = false;
-const Pristine = null;
-type InputState = typeof Valid | typeof Invalid | typeof Pristine;
 
 export function InputText({
   label,
@@ -31,8 +28,9 @@ export function InputText({
   errorText = '',
   confirmPassword,
   confirmPasswordValidator,
+  setValidState,
 }: InputTextProps) {
-  const [validState, setValidState] = useState<InputState>(Pristine);
+  const [validStateLocal, setValidStateLocal] = useState<InputState>(null);
 
   const changeText = (e: React.FormEvent<HTMLInputElement>) => {
     onChangeText(e.currentTarget.value);
@@ -42,13 +40,17 @@ export function InputText({
   const validate = (inputValue: string) => {
     if (type === 'password' && confirmPassword && confirmPasswordValidator) {
       const valid = confirmPasswordValidator(inputValue, confirmPassword);
-      setValidState(valid);
+      setValidStateLocal(valid);
+
+      if (setValidState) setValidState(valid);
       return;
     }
 
     if (validator) {
       const valid = validator(inputValue);
-      setValidState(valid);
+      setValidStateLocal(valid);
+
+      if (setValidState) setValidState(valid);
     }
   };
 
@@ -60,9 +62,9 @@ export function InputText({
         placeholder={placeholder}
         value={value}
         onChange={changeText}
-        isError={validState}
+        isError={validStateLocal}
       />
-      <S.ErrorText isActive={validState === Invalid ? true : false}>
+      <S.ErrorText isActive={validStateLocal === false ? true : false}>
         {errorText}
       </S.ErrorText>
     </>

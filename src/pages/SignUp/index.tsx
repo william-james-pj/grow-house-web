@@ -9,16 +9,22 @@ import { InputText } from '../../Components/InputText';
 import { Loading } from '../../Components/Loading';
 import { emailValidator } from '../../utils/emailValidator';
 import { passwordValidator } from '../../utils/passwordValidator';
+import { confirmPasswordValidator } from '../../utils/confirmPasswordValidator';
+import { InputState } from '../../config/types';
 
 import * as S from '../Login/styles';
-import { confirmPasswordValidator } from '../../utils/confirmPasswordValidator';
 
 export function SignUp() {
-  const { signin } = useAuth();
+  const { signin, errorMsg, clearErrorMsg } = useAuth();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
+  const [emailValid, setEmailValid] = useState<InputState>(null);
   const [password, setPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState<InputState>(null);
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPasswordValid, setRepeatPasswordValid] =
+    useState<InputState>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSingUp = async (event: FormEvent) => {
@@ -26,13 +32,22 @@ export function SignUp() {
     try {
       if (!email.trim().length || !password.trim().length) return;
 
+      if (
+        emailValid === null ||
+        emailValid === false ||
+        passwordValid === null ||
+        passwordValid === false ||
+        repeatPasswordValid === null ||
+        repeatPasswordValid === false
+      )
+        return;
+
       setLoading(true);
       await signin({ email, password });
       setLoading(false);
       navigate('/');
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
   };
 
@@ -56,6 +71,7 @@ export function SignUp() {
               value={email}
               validator={emailValidator}
               errorText={'Por favor insira um endereço de e-mail válido'}
+              setValidState={setEmailValid}
             />
             <InputText
               type="password"
@@ -65,6 +81,7 @@ export function SignUp() {
               value={password}
               validator={passwordValidator}
               errorText={'A senha deve ter pelo menos 6 caracteres'}
+              setValidState={setPasswordValid}
             />
             <InputText
               type="password"
@@ -75,13 +92,22 @@ export function SignUp() {
               confirmPasswordValidator={confirmPasswordValidator}
               confirmPassword={password}
               errorText={'Senha e senha de confirmação devem ser iguais.'}
+              setValidState={setRepeatPasswordValid}
             />
+
+            {errorMsg !== '' ? <S.TextError>{errorMsg}</S.TextError> : null}
+
             <Button type="submit">Entrar</Button>
           </S.Form>
 
           <S.NavigationContainer>
             <S.NavigationText>Já tem uma conta?</S.NavigationText>
-            <S.NavigationLink onClick={() => navigate('/login')}>
+            <S.NavigationLink
+              onClick={() => {
+                clearErrorMsg();
+                navigate('/login');
+              }}
+            >
               Entrar
             </S.NavigationLink>
           </S.NavigationContainer>

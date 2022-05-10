@@ -16,6 +16,7 @@ type AuthContextType = {
   logout: () => void;
   errorMsg: string;
   isLoading: boolean;
+  clearErrorMsg: () => void;
 };
 
 type AuthContextProviderProps = {
@@ -36,6 +37,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
   async function signin(useProps: createUserProps) {
     try {
+      setErrorMsg('');
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         useProps.email,
@@ -53,11 +55,13 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       } else {
         setErrorMsg(error.message);
       }
+      throw error;
     }
   }
 
   async function login(email: string, password: string) {
     try {
+      setErrorMsg('');
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -67,13 +71,20 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       setUser({
         id: uid || '',
       });
-    } catch (error) {}
+    } catch (error) {
+      setErrorMsg('E-mail e/ou senha inválido(s)');
+      throw error;
+    }
   }
 
   function logout() {
     signOut(auth).then(() => {
       setUser(undefined);
     });
+  }
+
+  function clearErrorMsg() {
+    setErrorMsg('');
   }
 
   useEffect(() => {
@@ -102,6 +113,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         logout,
         errorMsg,
         isLoading,
+        clearErrorMsg,
       }}
     >
       {props.children}

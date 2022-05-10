@@ -9,19 +9,23 @@ import { Button } from '../../Components/Button';
 import { InputText } from '../../Components/InputText';
 import { Loading } from '../../Components/Loading';
 import { emailValidator } from '../../utils/emailValidator';
-import { passwordValidator } from '../../utils/passwordValidator';
+import { InputState } from '../../config/types';
 
 export function Login() {
+  const navigate = useNavigate();
+  const { login, errorMsg, clearErrorMsg } = useAuth();
+
   const [email, setEmail] = useState('');
+  const [emailValid, setEmailValid] = useState<InputState>(null);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     try {
       if (!email.trim().length || !password.trim().length) return;
+
+      if (emailValid === null || emailValid === false) return;
 
       setLoading(true);
       await login(email, password);
@@ -29,7 +33,6 @@ export function Login() {
       navigate('/');
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
   };
 
@@ -53,6 +56,7 @@ export function Login() {
               value={email}
               validator={emailValidator}
               errorText={'Por favor insira um endereço de e-mail válido'}
+              setValidState={setEmailValid}
             />
             <InputText
               type="password"
@@ -60,16 +64,22 @@ export function Login() {
               placeholder="Senha"
               onChangeText={setPassword}
               value={password}
-              validator={passwordValidator}
-              errorText={'A senha deve ter pelo menos 6 caracteres'}
             />
             <S.TextForgot>Esqueceu a senha?</S.TextForgot>
+
+            {errorMsg !== '' ? <S.TextError>{errorMsg}</S.TextError> : null}
+
             <Button type="submit">Entrar</Button>
           </S.Form>
 
           <S.NavigationContainer>
             <S.NavigationText>Não tem uma conta?</S.NavigationText>
-            <S.NavigationLink onClick={() => navigate('/signup')}>
+            <S.NavigationLink
+              onClick={() => {
+                clearErrorMsg();
+                navigate('/signup');
+              }}
+            >
               Inscrever-se
             </S.NavigationLink>
           </S.NavigationContainer>

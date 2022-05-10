@@ -1,3 +1,8 @@
+const Valid = true;
+const Invalid = false;
+const Pristine = null;
+export type InputState = typeof Valid | typeof Invalid | typeof Pristine;
+
 export type UserType = {
   id: string;
 };
