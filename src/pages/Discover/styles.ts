@@ -23,3 +23,8 @@ export const CarouselContainer = styled.div`
     grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
   `}
 `;
+
+export const LoadingContainer = styled.div`
+  width: 100%;
+  margin-top: 32px;
+`;

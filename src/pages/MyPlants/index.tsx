@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 import { SearchBar } from '../../Components/SearchBar';
 import { CardMyPlants } from '../../Components/CardMyPlants';
 import { useMyPlants } from '../../hooks/useMyPlants';
+import { FaceSad } from '../../Components/Icon';
+import { useTheme } from 'styled-components';
 
-import * as S from './styles';
-import { Container, Title } from '../Home/styles';
 import { MyPlantsType } from '../../config/types';
 
+import { Container, Title } from '../Home/styles';
+import * as S from './styles';
+
 export function MyPlats() {
+  const theme = useTheme();
   const { myPlantsData, loadMyPlants } = useMyPlants();
   const [searchText, setSearchText] = useState('');
   const [filterData, setFilterData] = useState<MyPlantsType[]>([]);
@@ -48,6 +52,16 @@ export function MyPlats() {
         />
       </S.Header>
       <S.CarouselContainer>
+        {filterData.length === 0 ? (
+          <S.EmptyContainer>
+            <S.EmptyIconContainer>
+              <FaceSad color={theme.colors.text} />
+            </S.EmptyIconContainer>
+            <S.EmptyTitle>{'Seu jardim está vazio!'}</S.EmptyTitle>
+            <S.EmptySubTitle>{'Adicione uma nova planta'}</S.EmptySubTitle>
+          </S.EmptyContainer>
+        ) : null}
+
         {filterData.map((item) => {
           return <CardMyPlants item={item} key={`discover-${item.id}`} />;
         })}

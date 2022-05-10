@@ -4,6 +4,7 @@ import { Container, Title } from '../Home/styles';
 import { CardDiscover } from '../../Components/CardDiscover';
 import { useDiscover } from '../../hooks/useDiscover';
 
+import { Loading } from '../../Components/Loading';
 import { SearchBar } from '../../Components/SearchBar';
 import { Header } from '../MyPlants/styles';
 import { DiscoverType } from '../../config/types';
@@ -49,6 +50,12 @@ export function Discover() {
         />
       </Header>
       <S.CarouselContainer>
+        {filterData.length === 0 ? (
+          <S.LoadingContainer>
+            <Loading isFullPage={false} />
+          </S.LoadingContainer>
+        ) : null}
+
         {filterData.map((item) => {
           return <CardDiscover item={item} key={`discover-${item.id}`} />;
         })}

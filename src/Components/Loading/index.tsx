@@ -4,11 +4,15 @@ import CircularProgress from '../CircularProgress';
 
 import * as S from './styles';
 
-export function Loading() {
+type LoadingProps = {
+  isFullPage?: boolean;
+};
+
+export function Loading({ isFullPage = true }: LoadingProps) {
   const theme = useTheme();
 
   return (
-    <S.Wrapper>
+    <S.Wrapper isFullPage={isFullPage}>
       <CircularProgress color={theme.colors.text} />
     </S.Wrapper>
   );
