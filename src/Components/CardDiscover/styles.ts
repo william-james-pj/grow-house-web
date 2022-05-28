@@ -35,6 +35,8 @@ export const ImageContainer = styled.div`
   background: ${(props) => props.theme.colors.secundary};
   transition: ${delay};
 
+  overflow: hidden;
+
   display: flex;
   align-items: flex-end;
   justify-content: center;

@@ -20,9 +20,7 @@ export const Container = styled.div<ActiveProps>`
   top: 0;
   left: 0;
 
-  ${respondToDown.xs`
-    background: rgba(0, 0, 0, 0.3);
-  `}
+  background: rgba(0, 0, 0, 0.3);
 `;
 
 export const ModalContainer = styled.div`
@@ -34,7 +32,7 @@ export const ModalContainer = styled.div`
   width: 500px;
   height: 100vh;
   background: ${(props) => props.theme.colors.background};
-  border-radius: 64px 0 0 64px;
+  border-radius: 32px 0 0 32px;
 
   padding: 40px 32px;
 

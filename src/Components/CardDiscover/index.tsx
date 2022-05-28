@@ -8,10 +8,15 @@ type CardDiscoverProps = {
 };
 
 export function CardDiscover({ item }: CardDiscoverProps) {
-  const { openModal } = useModalDiscover();
+  const { openModal, setNewDiscoverItem } = useModalDiscover();
+
+  const buttonPress = () => {
+    setNewDiscoverItem(item);
+    openModal(true);
+  };
 
   return (
-    <S.Container onClick={() => openModal(true)}>
+    <S.Container onClick={buttonPress}>
       <S.ImageContainer>
         <S.Image src={item.image} />
       </S.ImageContainer>
