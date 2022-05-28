@@ -16,7 +16,7 @@ export function CardMyPlants({ item }: CardMyPlantsProps) {
       <S.TextContainer>
         <S.Title>{item.name}</S.Title>
         <S.SubTitle>{item.surname}</S.SubTitle>
-        <WaterIndicator />
+        <WaterIndicator value={item.values?.humidity} />
       </S.TextContainer>
     </S.Container>
   );

@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
 
 import { database } from '../services/firebase';
-import { ref, child, set, get, remove } from 'firebase/database';
+import { ref, child, set, get, remove, onValue } from 'firebase/database';
 import { useAuth } from '../hooks/useAuth';
 
 import { MyPlantsType } from '../config/types';
@@ -45,6 +45,7 @@ export function MyPlantsContextProvider(props: MyPlantsContextProviderProps) {
             surname: val.surname,
             imageUrl: val.imageUrl,
             plantId: val.plantId,
+            sensorId: val.sensorId,
           });
         });
       })
@@ -52,7 +53,32 @@ export function MyPlantsContextProvider(props: MyPlantsContextProviderProps) {
         console.error(error);
       });
 
-    setMyPlants(data);
+    await loadSensor(data);
+  };
+
+  const loadSensor = async (items: MyPlantsType[]) => {
+    for (const item of items) {
+      const starCountRef = ref(database, `Sensors/${item.sensorId}`);
+      onValue(starCountRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          return;
+        }
+
+        let aux = [...myPlantsData];
+
+        if (aux.length === 0) {
+          aux = [...items];
+        }
+
+        aux.forEach((itemAux) => {
+          if (itemAux.sensorId === item.sensorId) {
+            itemAux.values = snapshot.val();
+          }
+        });
+
+        setMyPlants(aux);
+      });
+    }
   };
 
   const addNewPlat = async (newPlant: MyPlantsType) => {

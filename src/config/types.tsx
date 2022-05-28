@@ -13,6 +13,11 @@ export type MyPlantsType = {
   surname: string;
   imageUrl: string;
   plantId: string;
+  sensorId: string;
+  values?: {
+    humidity: string;
+    reservoir: string;
+  };
 };
 
 export type DiscoverType = {

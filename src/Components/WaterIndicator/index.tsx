@@ -5,12 +5,16 @@ import { Water } from '../Icon';
 
 import * as S from './styles';
 
-export function WaterIndicator() {
+type WaterIndicatorProps = {
+  value?: string;
+};
+
+export function WaterIndicator({ value = '' }: WaterIndicatorProps) {
   const theme = useTheme();
   return (
     <S.Wrapper>
       <Water color={theme.colors.blueDark} />
-      <S.Title>80%</S.Title>
+      <S.Title>{`${value}%`}</S.Title>
     </S.Wrapper>
   );
 }
