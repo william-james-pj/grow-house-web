@@ -15,6 +15,6 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: center;
 
-  overflow-y: ${({ isModalOpen }) => (isModalOpen ? 'hidden' : 'scroll')};
+  overflow-y: ${({ isModalOpen }) => (isModalOpen ? 'hidden' : 'auto')};
   overflow-x: hidden;
 `;

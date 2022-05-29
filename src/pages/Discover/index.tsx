@@ -50,7 +50,7 @@ export function Discover() {
         />
       </Header>
       <S.CarouselContainer>
-        {filterData.length === 0 ? (
+        {filterData.length === 0 && searchText === '' ? (
           <S.LoadingContainer>
             <Loading isFullPage={false} />
           </S.LoadingContainer>
