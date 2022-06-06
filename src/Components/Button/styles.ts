@@ -26,4 +26,6 @@ export const ButtonStyled = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 `;

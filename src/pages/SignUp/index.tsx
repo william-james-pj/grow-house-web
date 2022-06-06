@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react';
-import * as S from './styles';
 
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
@@ -9,26 +8,42 @@ import { Button } from '../../Components/Button';
 import { InputText } from '../../Components/InputText';
 import { Loading } from '../../Components/Loading';
 import { emailValidator } from '../../utils/emailValidator';
+import { passwordValidator } from '../../utils/passwordValidator';
+import { confirmPasswordValidator } from '../../utils/confirmPasswordValidator';
 import { InputState } from '../../config/types';
 
-export function Login() {
+import * as S from '../Login/styles';
+
+export function SignUp() {
+  const { signin, errorMsg, clearErrorMsg } = useAuth();
   const navigate = useNavigate();
-  const { login, errorMsg, clearErrorMsg } = useAuth();
 
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState<InputState>(null);
   const [password, setPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState<InputState>(null);
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPasswordValid, setRepeatPasswordValid] =
+    useState<InputState>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (event: FormEvent) => {
+  const handleSingUp = async (event: FormEvent) => {
     event.preventDefault();
     try {
       if (!email.trim().length || !password.trim().length) return;
 
-      if (emailValid === null || emailValid === false) return;
+      if (
+        emailValid === null ||
+        emailValid === false ||
+        passwordValid === null ||
+        passwordValid === false ||
+        repeatPasswordValid === null ||
+        repeatPasswordValid === false
+      )
+        return;
 
       setLoading(true);
-      await login(email, password);
+      await signin({ email, password });
       setLoading(false);
       navigate('/');
     } catch (error) {
@@ -44,11 +59,11 @@ export function Login() {
     <S.Container>
       <S.Content>
         <S.ContentBox>
-          <S.Title>Bem vindo de volta</S.Title>
+          <S.Title>Bem vindo</S.Title>
           <S.SubTitle>
-            Você pode continuar de onde parou fazendo login.
+            Você pode começar a usar o site após se inscrever.
           </S.SubTitle>
-          <S.Form onSubmit={handleLogin}>
+          <S.Form onSubmit={handleSingUp}>
             <InputText
               label="E-mail"
               placeholder="E-mail"
@@ -64,8 +79,21 @@ export function Login() {
               placeholder="Senha"
               onChangeText={setPassword}
               value={password}
+              validator={passwordValidator}
+              errorText={'A senha deve ter pelo menos 6 caracteres'}
+              setValidState={setPasswordValid}
             />
-            <S.TextForgot>Esqueceu a senha?</S.TextForgot>
+            <InputText
+              type="password"
+              label="Senha de confirmação"
+              placeholder="Senha de confirmação"
+              onChangeText={setRepeatPassword}
+              value={repeatPassword}
+              confirmPasswordValidator={confirmPasswordValidator}
+              confirmPassword={password}
+              errorText={'Senha e senha de confirmação devem ser iguais.'}
+              setValidState={setRepeatPasswordValid}
+            />
 
             {errorMsg !== '' ? <S.TextError>{errorMsg}</S.TextError> : null}
 
@@ -73,14 +101,14 @@ export function Login() {
           </S.Form>
 
           <S.NavigationContainer>
-            <S.NavigationText>Não tem uma conta?</S.NavigationText>
+            <S.NavigationText>Já tem uma conta?</S.NavigationText>
             <S.NavigationLink
               onClick={() => {
                 clearErrorMsg();
-                navigate('/signup');
+                navigate('/login');
               }}
             >
-              Inscrever-se
+              Entrar
             </S.NavigationLink>
           </S.NavigationContainer>
         </S.ContentBox>

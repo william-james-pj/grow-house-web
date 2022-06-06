@@ -78,28 +78,10 @@ export const Form = styled.form`
 
   display: flex;
   flex-direction: column;
-`;
 
-export const Label = styled.label`
-  font-size: ${fonts.normal};
-  color: ${({ theme }) => theme.colors.text};
-  font-weight: 700;
-  user-select: none;
-
-  margin: 16px 0 8px;
-
-  ${respondToDown.xs`
-    font-size: ${fonts.sm};
-  `}
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  height: 50px;
-  border-radius: 8px;
-  padding: 0 16px;
-  background: ${({ theme }) => theme.colors.card};
-  border: 1px solid ${({ theme }) => theme.colors.disabled};
+  > button {
+    margin-top: 32px;
+  }
 `;
 
 export const TextForgot = styled.p`
@@ -111,7 +93,7 @@ export const TextForgot = styled.p`
   text-align: right;
   cursor: pointer;
 
-  margin: 32px 0;
+  margin: 32px 0 0;
 
   ${respondToDown.xs`
     font-size: ${fonts.sm};
@@ -142,6 +124,8 @@ export const NavigationLink = styled.p`
   user-select: none;
 
   margin-left: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 
   ${respondToDown.xs`
     font-size: ${fonts.sm};
@@ -170,4 +154,15 @@ export const Img = styled.img`
   ${respondToDown.xs`
     max-width: 100px;
   `}
+`;
+
+export const TextError = styled.p`
+  font-size: ${fonts.sm};
+  color: ${({ theme }) => theme.colors.red};
+  font-weight: 700;
+  user-select: none;
+
+  margin: 16px 0 0;
+
+  text-align: center;
 `;
