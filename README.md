@@ -27,6 +27,8 @@
 
 Esse site foi construído como um complemento do aplicativo [GrowHouse](https://github.com/william-james-pj/GrowHouse), do qual auxilia no cultivo em jardins verticais caseiros através de um sistema de monitoramento e irrigação. Dessa forma, o site permite que o usuário tenha acesso aos dados do seu jardim através de uma plataforma web.
 
+[Link do site](https://growhouse-d6bd0.web.app/)
+
 ### Construído com
 
 O projeto foi construído utilizando:
